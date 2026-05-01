@@ -10,76 +10,75 @@
             --lavender: #E6E6FA;
             --deep-purple: #6A5ACD;
             --mint: #F2FFF9;
+            --dark-mint: #2D5A44;
             --black: #000000;
             --white: #FFFFFF;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-        
-        body, html { 
-            margin: 0; padding: 0; 
-            font-family: "Fredoka", sans-serif; 
-            background-color: var(--white); 
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
-        }
+        body, html { margin: 0; padding: 0; font-family: "Fredoka", sans-serif; background-color: var(--white); overflow: hidden; height: 100%; }
         
         button { cursor: pointer; font-family: inherit; transition: 0.1s; }
 
         .page {
-            display: none; 
-            min-height: 100vh; 
-            width: 100vw;
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center;
-            text-align: center; 
-            /* Added heavy padding to prevent header/footer blocking */
-            padding: 120px 25px 120px 25px; 
-            position: absolute; top: 0; left: 0;
-            overflow-y: auto; 
+            display: none; min-height: 100vh; width: 100vw;
+            flex-direction: column; justify-content: flex-start; align-items: center;
+            text-align: center; padding: 120px 25px 120px 25px; 
+            position: absolute; top: 0; left: 0; overflow-y: auto; 
         }
         
         .active { display: flex; }
+
+        .theme-lavender { background-color: var(--lavender) !important; color: var(--deep-purple) !important; }
+        .theme-lavender h2 { color: var(--deep-purple) !important; }
+        .theme-mint { background-color: var(--mint) !important; color: var(--dark-mint) !important; }
+        .theme-mint h2 { color: var(--dark-mint) !important; }
 
         .nav-header {
             position: fixed; top: 0; left: 0; width: 100%; 
             display: flex; justify-content: space-between; 
             padding: 15px; z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(8px);
-            border-bottom: 2px solid var(--lavender);
         }
 
-        .btn-small { background: var(--white); border: 2px solid var(--black); padding: 8px 12px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; box-shadow: 2px 2px 0px var(--black); }
+        .btn-small { background: var(--white); border: 2px solid var(--black); padding: 8px 12px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; box-shadow: 2px 2px 0px var(--black); color: var(--black) !important; }
 
-        h1 { font-size: 12vw; color: var(--deep-purple); margin: 20px 0; text-transform: lowercase; }
-        h2 { font-size: 2rem; margin: 20px 0; color: var(--deep-purple); line-height: 1.2; }
+        h1 { font-size: 12vw; margin: 20px 0; text-transform: lowercase; }
+        h2 { font-size: 2rem; margin: 20px 0; line-height: 1.2; }
         p { font-size: 1.3rem; line-height: 1.5; max-width: 95%; margin-bottom: 30px; }
 
         .btn {
             background: var(--white); border: 3px solid var(--black);
             padding: 15px 25px; border-radius: 50px; font-size: 1.1rem;
             margin: 10px; box-shadow: 4px 4px 0px var(--black);
-            width: 90%; max-width: 320px;
+            width: 90%; max-width: 320px; color: var(--black) !important;
         }
         .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--black); }
         
-        /* Spacing for Result Text */
-        .res-text { font-size: 1.8rem; font-weight: bold; margin: 40px 0; color: var(--deep-purple); min-height: 2.5rem; line-height: 1.3; padding: 0 10px; }
-
-        .next-btn { background: var(--lavender); margin-top: 50px; font-weight: bold; width: auto; border-radius: 20px; }
+        .res-text { font-size: 1.8rem; font-weight: bold; margin: 40px 0; min-height: 2.5rem; line-height: 1.3; padding: 0 10px; }
+        .next-btn { background: var(--white); margin-top: 50px; font-weight: bold; width: auto; border-radius: 20px; }
 
         .stage { font-size: 4rem; margin-bottom: 20px; }
-        
-        /* Chapter 5 Specific */
         .food-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; }
-        .cart-zone { font-size: 3rem; min-height: 100px; width: 100%; overflow: visible; display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+        .cart-zone { font-size: 3rem; min-height: 100px; width: 100%; display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
 
-        .race-track { width: 100%; max-width: 500px; height: 180px; background: #eee; border: 3px solid var(--black); border-radius: 20px; position: relative; margin: 30px 0; }
+        /* RACE STYLES */
+        .race-track { width: 100%; max-width: 500px; height: 180px; background: rgba(0,0,0,0.05); border: 3px solid var(--black); border-radius: 20px; position: relative; margin: 30px 0; }
         .racer { position: absolute; left: 0; transition: left 0.1s linear; font-size: 3.5rem; }
-        #commentary { font-weight: bold; font-size: 1.2rem; color: var(--deep-purple); margin-bottom: 10px; }
+        #commentary { font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+
+        /* BIG TAP BUTTON */
+        .big-tap-btn {
+            width: 80vw; max-width: 350px; height: 120px;
+            font-size: 2.5rem; border-radius: 60px;
+            background: var(--deep-purple); color: white !important;
+            border: 4px solid var(--black);
+            box-shadow: 0px 8px 0px var(--black);
+            margin-bottom: 20px;
+        }
+        .big-tap-btn:active { transform: translateY(4px); box-shadow: 0px 4px 0px var(--black); }
+        .boost-btn-small { background: #FF4500; color: white !important; font-size: 1.2rem; padding: 10px 30px; }
 
         @media (min-width: 800px) { h1 { font-size: 80px; } .btn { width: auto; } }
     </style>
@@ -91,25 +90,27 @@
         <button class="btn-small" onclick="toggleLanguage()" id="lang-btn">Switch to Spanish 🇲🇽</button>
     </div>
 
-    <div id="page-land" class="page active" style="background: var(--lavender); justify-content: center;">
+    <div id="page-land" class="page active theme-lavender" style="justify-content: center;">
         <div class="stage">🦊 🐧</div>
         <h1 id="title">why you should date me</h1>
         <button class="btn" onclick="showPage('0')" id="find-out">find out why</button>
     </div>
 
-    <div id="page-0" class="page">
+    <div id="page-0" class="page theme-mint">
         <div class="stage">🦊 💝 🐧</div>
         <h2 id="h1">Chapter 1: Gifts & Maximalism</h2>
         <p id="p1">Since my love language is gift giving, what are we doing today?</p>
-        <button class="btn" onclick="ch1('food')" id="opt1">Food</button>
-        <button class="btn" onclick="ch1('explore')" id="opt2">Explore a WHOLE NEW WORLD~</button>
-        <button class="btn" onclick="ch1('hot-topic')" id="opt3">Hot Topic & P&P Chill</button>
-        <button class="btn" onclick="ch1('surprise')" id="opt4">Surprise Me</button>
+        <div id="ch1-btns">
+            <button class="btn" onclick="ch1('food')" id="opt1">Food</button>
+            <button class="btn" onclick="ch1('explore')" id="opt2">Explore a WHOLE NEW WORLD~</button>
+            <button class="btn" onclick="ch1('hot-topic')" id="opt3">Hot Topic & P&P Chill</button>
+            <button class="btn" onclick="ch1('surprise')" id="opt4">Surprise Me</button>
+        </div>
         <div id="ch1-res" class="res-text"></div>
         <button class="btn next-btn" onclick="showPage('1')" id="n1" style="display:none;">Chapter 2: Loyalty →</button>
     </div>
 
-    <div id="page-1" class="page" style="background: var(--mint);">
+    <div id="page-1" class="page theme-lavender">
         <div class="stage" id="l-stage">🔓 🐧</div>
         <h2 id="h2">Chapter 2: Absolute Loyalty</h2>
         <p id="p2">Tap the lock to secure Mark's heart forever!</p>
@@ -118,7 +119,7 @@
         <button class="btn next-btn" onclick="showPage('2')" id="n2" style="display:none;">Chapter 3: Nerd Life →</button>
     </div>
 
-    <div id="page-2" class="page">
+    <div id="page-2" class="page theme-mint">
         <div class="stage">⚔️ 🦊 🐧 📖</div>
         <h2 id="h3">Chapter 3: Nerd Life</h2>
         <p id="p3">Ready for the Renfaire and Manhwa binge?</p>
@@ -127,7 +128,7 @@
         <button class="btn next-btn" onclick="showPage('3')" id="n3" style="display:none;">Chapter 4: Side Quests →</button>
     </div>
 
-    <div id="page-3" class="page" style="background: var(--lavender);">
+    <div id="page-3" class="page theme-lavender">
         <div class="stage">✈️ 🗺️</div>
         <h2 id="h4">Chapter 4: Spontaneous Side Quests</h2>
         <p id="p4">Where should we go this month?</p>
@@ -137,7 +138,7 @@
         <button class="btn next-btn" onclick="showPage('4')" id="n4" style="display:none;">Chapter 5: Tomatoes →</button>
     </div>
 
-    <div id="page-4" class="page">
+    <div id="page-4" class="page theme-mint">
         <div class="cart-zone" id="cart">🛒</div>
         <h2 id="h5">Chapter 5: Tomato Foodies</h2>
         <p id="p5">I buy the tomatoes, you eat all you want!</p>
@@ -151,24 +152,22 @@
         <button class="btn next-btn" onclick="showPage('5')" id="n5">THE RACE! →</button>
     </div>
 
-    <div id="page-5" class="page" style="background: var(--mint);">
+    <div id="page-5" class="page theme-lavender">
         <h2 id="gh">Affection Race</h2>
-        <p id="gs" style="color: var(--deep-purple); margin: 0;">Who is the most affectionate?</p>
+        <p id="gs" style="margin: 0;">Who is the most affectionate?</p>
         <div id="commentary"></div>
         <div class="race-track">
             <div id="fox-b" class="racer" style="top: 10px;">🦊</div>
             <div id="pen-b" class="racer" style="top: 85px;">🐧</div>
         </div>
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
-            <button class="btn" id="r-btn" onclick="r()" style="width:140px;">TAP!</button>
-            <button class="btn" id="boost-btn" onclick="boost()" style="background:#FF4500; color:white; width:140px;">🚀 BOOST</button>
-        </div>
+        <button class="big-tap-btn" id="r-btn" onclick="r()">TAP!</button>
+        <button class="btn boost-btn-small" id="boost-btn" onclick="boost()">🚀 BOOST</button>
         <div id="g-msg" class="res-text"></div>
         <button class="btn" id="re-btn" onclick="resetR()" style="display:none;">RESTART RACE</button>
         <button class="btn next-btn" id="n6" onclick="showPage('6')" style="display:none;">Final Reason? →</button>
     </div>
 
-    <div id="page-6" class="page" style="background: var(--lavender); color: var(--deep-purple); justify-content: center;">
+    <div id="page-6" class="page theme-mint" style="justify-content: center;">
         <h2 id="h6" style="padding: 20px; font-size: 1.4rem;">Because we’re like, kinda cute yk & can flex on your friends, but mainly cuz we have a fat crush on each other so…cough. If I’m ever a jerk to you, just lmk & I’ll apologise & not do it again. Ur pretty good at communicating so I appreciate that about you alot :) Anyways im kinda shy. BYE!!!</h2>
         <button class="btn" onclick="location.reload()" id="restart-final">Back to Start</button>
     </div>
@@ -188,7 +187,7 @@
                 r1_f: "Yum! Dumpling date? 🥟", r1_e: "To the moon and back! 🌙", r1_h: "Anyone says Pride & Prejudice, Broadway plays, & more?", r1_s: "Future Mark will plan smth spontaneous on the spot lol so idk",
                 n1: "Chapter 2: Loyalty →", h2: "Chapter 2: Absolute Loyalty", p2: "Tap the lock to secure Mark's heart forever!", lbtn: "🔒 Lock Heart",
                 r2_1: "Heart Secured! It was way too easy huh? 🐧❤️", r2_2: "hey, you already secured my heart, u selfish jelly person, chill!",
-                r2_3: "😭 relájate, my soft heart cant take anymore of your cuteness & I gotta leave room for God ;-;",
+                r2_3: "😭 chill, my soft heart cant take anymore of your cuteness & I gotta leave room for God ;-;",
                 r2_roast: "Checking the locks again? You must be really obsessed with me... 😉",
                 n2: "Chapter 3: Nerd Life →", h3: "Chapter 3: Nerd Life", p3: "Ready for the Renfaire and Manhwa binge?", nbtn: "Go to Renfaire!",
                 r3: "Huzzah!! Now time to go to our places & binge read 20 chapters of our webtoons",
@@ -319,21 +318,17 @@
             const msg = document.getElementById('cart-msg');
             const c = t[lang];
             cart.innerText += item;
-            
             if(cItems >= 20) {
                 msg.innerText = c.cart_stop;
                 document.getElementById('food-ctrls').style.display = 'none';
-            } else if(cItems >= 10) {
-                msg.innerText = c.cart_m2;
-            } else if(cItems >= 5) {
-                msg.innerText = c.cart_m1;
-            }
+            } else if(cItems >= 10) msg.innerText = c.cart_m2;
+            else if(cItems >= 5) msg.innerText = c.cart_m1;
         }
 
         let fP = 0, pP = 0, active = true;
         function r() {
             if(!active) return;
-            let stepF = 18; let stepP = 20; 
+            let stepF = 18; let stepP = 22; 
             fP += Math.random() * stepF; pP += Math.random() * stepP;
             updateTrack();
         }
@@ -357,9 +352,10 @@
                 document.getElementById('r-btn').style.display = 'none';
                 document.getElementById('boost-btn').style.display = 'none';
                 const msg = document.getElementById('g-msg');
-                if(Math.abs(fP - pP) < 15) msg.innerHTML = t[lang].draw;
-                else if(fP > pP) msg.innerHTML = t[lang].win1;
-                else msg.innerHTML = t[lang].win2;
+                const cL = t[lang];
+                if(Math.abs(fP - pP) < 15) msg.innerHTML = cL.draw;
+                else if(fP > pP) msg.innerHTML = cL.win1;
+                else msg.innerHTML = cL.win2;
                 document.getElementById('re-btn').style.display = 'block';
                 setTimeout(() => { document.getElementById('n6').style.display = 'block'; }, 1000);
             }
