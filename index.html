@@ -16,29 +16,42 @@
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-        body, html { margin: 0; padding: 0; font-family: "Fredoka", sans-serif; background-color: var(--white); overflow: hidden; height: 100%; }
+        
+        /* FIX: Allow global vertical scrolling */
+        body, html { 
+            margin: 0; padding: 0; 
+            font-family: "Fredoka", sans-serif; 
+            background-color: var(--white); 
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto; 
+        }
         
         button { cursor: pointer; font-family: inherit; transition: 0.1s; }
 
         .page {
-            display: none; min-height: 100vh; width: 100vw;
-            flex-direction: column; justify-content: flex-start; align-items: center;
-            text-align: center; padding: 120px 25px 120px 25px; 
-            position: absolute; top: 0; left: 0; overflow-y: auto; 
+            display: none; 
+            min-height: 100vh; 
+            width: 100vw;
+            flex-direction: column; 
+            justify-content: flex-start; 
+            align-items: center;
+            text-align: center; 
+            padding: 120px 25px 120px 25px; 
+            position: absolute; top: 0; left: 0;
         }
         
-        .active { display: flex; }
+        .active { display: flex; position: relative; }
 
         .theme-lavender { background-color: var(--lavender) !important; color: var(--deep-purple) !important; }
-        .theme-lavender h2 { color: var(--deep-purple) !important; }
         .theme-mint { background-color: var(--mint) !important; color: var(--dark-mint) !important; }
-        .theme-mint h2 { color: var(--dark-mint) !important; }
 
         .nav-header {
             position: fixed; top: 0; left: 0; width: 100%; 
             display: flex; justify-content: space-between; 
             padding: 15px; z-index: 100;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(8px);
         }
 
@@ -66,9 +79,7 @@
         /* RACE STYLES */
         .race-track { width: 100%; max-width: 500px; height: 180px; background: rgba(0,0,0,0.05); border: 3px solid var(--black); border-radius: 20px; position: relative; margin: 30px 0; }
         .racer { position: absolute; left: 0; transition: left 0.1s linear; font-size: 3.5rem; }
-        #commentary { font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
-
-        /* BIG TAP BUTTON */
+        
         .big-tap-btn {
             width: 80vw; max-width: 350px; height: 120px;
             font-size: 2.5rem; border-radius: 60px;
@@ -100,12 +111,10 @@
         <div class="stage">🦊 💝 🐧</div>
         <h2 id="h1">Chapter 1: Gifts & Maximalism</h2>
         <p id="p1">Since my love language is gift giving, what are we doing today?</p>
-        <div id="ch1-btns">
-            <button class="btn" onclick="ch1('food')" id="opt1">Food</button>
-            <button class="btn" onclick="ch1('explore')" id="opt2">Explore a WHOLE NEW WORLD~</button>
-            <button class="btn" onclick="ch1('hot-topic')" id="opt3">Hot Topic & P&P Chill</button>
-            <button class="btn" onclick="ch1('surprise')" id="opt4">Surprise Me</button>
-        </div>
+        <button class="btn" onclick="ch1('food')" id="opt1">Food</button>
+        <button class="btn" onclick="ch1('explore')" id="opt2">Explore a WHOLE NEW WORLD~</button>
+        <button class="btn" onclick="ch1('hot-topic')" id="opt3">Hot Topic & P&P Chill</button>
+        <button class="btn" onclick="ch1('surprise')" id="opt4">Surprise Me</button>
         <div id="ch1-res" class="res-text"></div>
         <button class="btn next-btn" onclick="showPage('1')" id="n1" style="display:none;">Chapter 2: Loyalty →</button>
     </div>
@@ -155,7 +164,7 @@
     <div id="page-5" class="page theme-lavender">
         <h2 id="gh">Affection Race</h2>
         <p id="gs" style="margin: 0;">Who is the most affectionate?</p>
-        <div id="commentary"></div>
+        <div id="commentary" style="height: 20px; font-weight: bold;"></div>
         <div class="race-track">
             <div id="fox-b" class="racer" style="top: 10px;">🦊</div>
             <div id="pen-b" class="racer" style="top: 85px;">🐧</div>
@@ -222,7 +231,7 @@
                 cart_m1: "¿Estás segura de que necesitas tanto?", cart_m2: "En fin... supongo que me quedaré en la quiebra comprando todo esto para ti... 😅",
                 cart_stop: "¡Paraaaa! ¡Por favooor! ¡Tengo que ahorrar para el anillo! ¡Peter James, Philip Michael, Amelia Grace, Lilian Rose y Mickey Mikaela Mackenzie Marasigan pueden alimentarse solos! XD",
                 n5: "¡LA CARRERA! →", gh: "¡Carrera de Afecto!", gs: "¿Quién es más cariñoso?", gbtn: "¡DALE YA!", back: "← Atrás", toggle: "Cambiar a Inglés 🇺🇸",
-                win1: "¡Tú ganas! Supongo que me tocarán más besos ;)", win2: "¡Mark gana! Prepárate para un abrazo gigante después de nuestra cita!",
+                win1: "¡Tú ganas! Supongo que me tocarán más de tus besos ;)", win2: "¡Mark gana! Prepárate para un abrazo gigante después de nuestra cita!",
                 draw: "¡Empate! No sé, lo que sea lol", rebtn: "REINICIAR CARRERA", n6: "¿Razón Final? →",
                 lC: "¡Rápido! ¡Mark va ganando!", wC: "Oye... deja que gane Mark, por fiii", tC: "¡Corre, Forrest, CORRE!",
                 h6: "Porque somos, como que lindos y podemos presumir con tus amigos, pero principalmente porque nos gustamos demasiado... cough. Si alguna vez me porto mal contigo, dímelo y me disculparé. Eres buena comunicándote y lo aprecio mucho :) Soy tímido. ¡ADIÓS!",
@@ -235,7 +244,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = document.getElementById('page-'+id);
             target.classList.add('active');
-            target.scrollTop = 0;
+            window.scrollTo(0, 0); // Scroll main window to top
             cur = id;
             document.getElementById('back-nav').style.visibility = (id === 'land') ? 'hidden' : 'visible';
         }
@@ -246,6 +255,7 @@
                 document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
                 document.getElementById('page-'+p).classList.add('active');
                 cur = p;
+                window.scrollTo(0, 0);
                 document.getElementById('back-nav').style.visibility = (cur === 'land') ? 'hidden' : 'visible';
             }
         }
@@ -352,10 +362,9 @@
                 document.getElementById('r-btn').style.display = 'none';
                 document.getElementById('boost-btn').style.display = 'none';
                 const msg = document.getElementById('g-msg');
-                const cL = t[lang];
-                if(Math.abs(fP - pP) < 15) msg.innerHTML = cL.draw;
-                else if(fP > pP) msg.innerHTML = cL.win1;
-                else msg.innerHTML = cL.win2;
+                if(Math.abs(fP - pP) < 15) msg.innerHTML = t[lang].draw;
+                else if(fP > pP) msg.innerHTML = t[lang].win1;
+                else msg.innerHTML = t[lang].win2;
                 document.getElementById('re-btn').style.display = 'block';
                 setTimeout(() => { document.getElementById('n6').style.display = 'block'; }, 1000);
             }
