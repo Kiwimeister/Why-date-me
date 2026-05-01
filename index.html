@@ -14,289 +14,367 @@
             --white: #FFFFFF;
         }
 
-        * { 
-            box-sizing: border-box; 
-            scroll-behavior: smooth; 
-            -webkit-tap-highlight-color: transparent; 
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        body, html { margin: 0; padding: 0; font-family: "Fredoka", sans-serif; background-color: var(--white); overflow: hidden; height: 100%; }
+        
+        button { cursor: pointer; font-family: inherit; transition: 0.1s; }
+
+        .page {
+            display: none; height: 100vh; width: 100vw;
+            flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px; position: absolute; top: 0; left: 0;
         }
+        .active { display: flex; }
 
-        body, html {
-            margin: 0; padding: 0;
-            font-family: "Fredoka", sans-serif;
-            background-color: var(--white);
-            color: var(--black);
+        .nav-header {
+            position: fixed; top: 15px; width: 100%; display: flex; justify-content: space-between; padding: 0 15px; z-index: 100;
         }
+        .btn-small { background: var(--white); border: 2px solid var(--black); padding: 8px 15px; border-radius: 50px; font-weight: bold; font-size: 0.9rem; box-shadow: 3px 3px 0px var(--black); }
 
-        /* Prevent Zoom on Buttons */
-        button { touch-action: manipulation; }
+        h1 { font-size: 12vw; color: var(--deep-purple); margin-bottom: 10px; text-transform: lowercase; }
+        h2 { font-size: 2.2rem; margin: 15px 0; color: var(--deep-purple); line-height: 1.1; }
+        p { font-size: 1.4rem; line-height: 1.4; max-width: 90%; margin-bottom: 25px; }
 
-        .lang-toggle {
-            position: fixed; top: 15px; right: 15px; z-index: 100;
-            background: var(--white); border: 2px solid var(--black);
-            padding: 8px 12px; border-radius: 50px; cursor: pointer;
-            font-size: 0.9rem; font-weight: bold;
-            box-shadow: 4px 4px 0px var(--lavender);
+        .btn {
+            background: var(--white); border: 3px solid var(--black);
+            padding: 15px 30px; border-radius: 50px; font-size: 1.2rem;
+            margin: 8px; box-shadow: 5px 5px 0px var(--black);
         }
+        .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--black); }
+        
+        .next-btn { background: var(--lavender); margin-top: 30px; font-weight: bold; font-size: 1.4rem; }
 
-        /* LANDING PAGE - WEBTOON STYLE */
-        .landing-page {
-            height: 100vh;
-            background-color: var(--lavender);
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center; position: relative;
-            padding: 20px;
-        }
+        .stage { font-size: 5rem; margin-bottom: 20px; }
+        .res-text { font-size: 2.2rem; font-weight: bold; margin-top: 20px; color: var(--deep-purple); min-height: 2.5rem; line-height: 1.2; }
+        .cart-zone { font-size: 3rem; min-height: 100px; max-width: 300px; overflow: hidden; display: flex; flex-wrap: wrap; justify-content: center; }
 
-        .hero-text {
-            font-size: 14vw; /* Scaled for mobile */
-            font-weight: bold; color: var(--deep-purple);
-            margin: 0; line-height: 1.1; text-transform: lowercase;
-            z-index: 2;
-        }
+        .race-track { width: 90%; height: 180px; background: #eee; border: 3px solid var(--black); border-radius: 20px; position: relative; margin: 20px 0; }
+        .racer { position: absolute; left: 0; transition: left 0.1s linear; font-size: 4rem; }
+        #commentary { position: absolute; width: 100%; font-weight: bold; pointer-events: none; z-index: 5; }
 
-        .floating-emoji {
-            font-size: 4rem; position: absolute;
-            z-index: 1;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .start-btn {
-            margin-top: 40px; font-family: inherit; font-size: 1.8rem;
-            color: var(--black); background: var(--white);
-            border: 3px solid var(--black); padding: 12px 35px;
-            border-radius: 100px; cursor: pointer;
-            box-shadow: 6px 6px 0px var(--deep-purple);
-            z-index: 3;
-        }
-
-        /* WEBTOON REASONS SECTION */
-        .reasons-container {
-            width: 100%; max-width: 600px;
-            margin: 0 auto; display: flex; flex-direction: column;
-        }
-
-        .panel {
-            padding: 80px 25px;
-            border-bottom: 1px solid #eee;
-            display: flex; flex-direction: column;
-            align-items: center; text-align: center;
-        }
-
-        .panel-icon { font-size: 5rem; margin-bottom: 15px; }
-        .panel h2 { font-size: 1.8rem; margin: 10px 0; color: var(--deep-purple); }
-        .panel p { font-size: 1.25rem; line-height: 1.6; color: #333; margin: 0; }
-        .highlight { background-color: var(--lavender); padding: 0 4px; }
-
-        /* GAME AREA */
-        .game-area {
-            background-color: var(--mint); padding: 60px 20px;
-            border-top: 3px solid var(--black);
-            text-align: center;
-        }
-
-        .race-track {
-            height: 200px; background: var(--white);
-            border-radius: 25px; border: 3px solid var(--black);
-            margin: 25px 0; position: relative; overflow: hidden;
-        }
-
-        .racer-box {
-            position: absolute; left: 0; width: 80px;
-            display: flex; flex-direction: column; align-items: center;
-            transition: left 0.1s linear;
-        }
-
-        #fox-box { top: 20px; }
-        #pen-box { top: 110px; }
-        .racer-emoji { font-size: 3.5rem; }
-        .racer-label { font-size: 0.85rem; font-weight: bold; margin-top: -5px; }
-
-        .game-btn {
-            width: 100%; max-width: 280px;
-            padding: 18px; font-size: 1.6rem;
-            background: var(--deep-purple); color: var(--white);
-            border: 3px solid var(--black); border-radius: 50px;
-            cursor: pointer; font-family: inherit;
-            box-shadow: 5px 5px 0px var(--black);
-        }
-
-        #commentary { height: 2.5rem; margin-bottom: 10px; font-weight: bold; color: var(--deep-purple); font-size: 1.3rem; }
-        #game-msg { font-size: 1.5rem; margin-top: 25px; font-weight: bold; padding: 0 10px; }
-        .sub-msg { font-size: 1.1rem; color: #666; margin-top: 15px; }
-
-        @media (min-width: 800px) {
-            .hero-text { font-size: 100px; }
-        }
+        @media (min-width: 800px) { h1 { font-size: 80px; } .race-track { width: 600px; } }
     </style>
 </head>
 <body>
 
-    <button class="lang-toggle" onclick="toggleLanguage()">Switch to Spanish 🇲🇽</button>
+    <div class="nav-header">
+        <button class="btn-small" onclick="goBack()" id="back-nav" style="display:none;">← Back</button>
+        <button class="btn-small" onclick="toggleLanguage()" id="lang-btn">Switch to Spanish 🇲🇽</button>
+    </div>
 
-    <section class="landing-page">
-        <div class="floating-emoji" style="top: 10%; left: 10%;">🦊</div>
-        <div class="floating-emoji" style="top: 15%; right: 10%; animation-delay: 1s;">🐧</div>
-        <h1 class="hero-text" id="main-title">why you should<br>date me</h1>
-        <button class="start-btn" id="main-btn" onclick="document.getElementById('reasons').scrollIntoView();">find out why</button>
-    </section>
+    <div id="page-land" class="page active" style="background: var(--lavender);">
+        <div class="stage">🦊 🐧</div>
+        <h1 id="title">why you should date me</h1>
+        <button class="btn" onclick="showPage('0')" id="find-out">find out why</button>
+    </div>
 
-    <div id="reasons" class="reasons-container">
-        <div class="panel">
-            <div class="panel-icon">🎁</div>
-            <h2 id="h1">01. Gifts & Maximalism</h2>
-            <p id="p1">Since my love language is <span class="highlight">gift giving</span> and you’re a <span class="highlight">maximalist</span>, it's perfect synergy. 🦊</p>
+    <div id="page-0" class="page">
+        <div class="stage">🦊 💝 🐧</div>
+        <h2 id="h1">Chapter 1: Gifts & Maximalism</h2>
+        <p id="p1">Since my love language is gift giving, what are we doing today?</p>
+        <div id="ch1-btns">
+            <button class="btn" onclick="ch1('food')" id="opt1">Food</button>
+            <button class="btn" onclick="ch1('explore')" id="opt2">Explore a WHOLE NEW WORLD~</button>
+            <button class="btn" onclick="ch1('hot-topic')" id="opt3">Hot Topic & P&P Chill</button>
+            <button class="btn" onclick="ch1('surprise')" id="opt4">Surprise Me</button>
         </div>
+        <div id="ch1-res" class="res-text"></div>
+        <button class="btn next-btn" onclick="showPage('1')" id="n1" style="display:none;">Chapter 2: Loyalty →</button>
+    </div>
 
-        <div class="panel">
-            <div class="panel-icon">🤝</div>
-            <h2 id="h2">02. Absolute Loyalty</h2>
-            <p id="p2">I won't cheat on you. You get 100% of my focus and devotion. 🐧</p>
+    <div id="page-1" class="page" style="background: var(--mint);">
+        <div class="stage" id="l-stage">🔓 🐧</div>
+        <h2 id="h2">Chapter 2: Absolute Loyalty</h2>
+        <p id="p2">Tap the lock to secure Mark's heart forever!</p>
+        <button class="btn" onclick="lockH()" id="l-btn">🔒 Lock Heart</button>
+        <div id="ch2-res" class="res-text"></div>
+        <button class="btn next-btn" onclick="showPage('2')" id="n2" style="display:none;">Chapter 3: Nerd Life →</button>
+    </div>
+
+    <div id="page-2" class="page">
+        <div class="stage">⚔️ 🦊 🐧 📖</div>
+        <h2 id="h3">Chapter 3: Nerd Life</h2>
+        <p id="p3">Ready for the Renfaire and Manhwa binge?</p>
+        <button class="btn" onclick="goN()" id="n-btn">Go to Renfaire!</button>
+        <div id="ch3-res" class="res-text"></div>
+        <button class="btn next-btn" onclick="showPage('3')" id="n3" style="display:none;">Chapter 4: Side Quests →</button>
+    </div>
+
+    <div id="page-3" class="page" style="background: var(--lavender);">
+        <div class="stage">✈️ 🗺️</div>
+        <h2 id="h4">Chapter 4: Spontaneous Side Quests</h2>
+        <p id="p4">Where should we go this month?</p>
+        <button class="btn" onclick="q('state')" id="opt-state">Trip Out of State</button>
+        <button class="btn" onclick="q('General Conference')" id="opt-gc">Gen Conf</button>
+        <div id="ch4-res" class="res-text"></div>
+        <button class="btn next-btn" onclick="showPage('4')" id="n4" style="display:none;">Chapter 5: Tomatoes →</button>
+    </div>
+
+    <div id="page-4" class="page">
+        <div class="cart-zone" id="cart">🛒</div>
+        <h2 id="h5">Chapter 5: Tomato Foodies</h2>
+        <p id="p5">I buy the tomatoes, you eat all you want!</p>
+        <div>
+            <button class="btn-small" onclick="add('🍅')" id="food-btn-1">Tomatoes</button>
+            <button class="btn-small" onclick="add('🦓')" id="food-btn-2">Zebra Cakes</button>
+            <button class="btn-small" onclick="add('🦄')" id="food-btn-3">Sparkle Cake</button>
+            <button class="btn-small" onclick="add('🧂')" id="food-btn-4">Salt</button>
         </div>
+        <div id="cart-msg" style="font-weight:bold; margin-top:10px; color:red; font-size: 1.1rem; padding: 0 10px;"></div>
+        <button class="btn next-btn" onclick="showPage('5')" id="n5">THE RACE! →</button>
+    </div>
 
-        <div class="panel">
-            <div class="panel-icon">📖</div>
-            <h2 id="h3">03. Nerd Life</h2>
-            <p id="p3">Binging <span class="highlight">Manhwa</span> and dressing up for <span class="highlight">Renfaires</span>. We'll be the best nerds. ✨</p>
+    <div id="page-5" class="page" style="background: var(--mint);">
+        <h2 id="gh">Affection Race</h2>
+        <p id="gs" style="font-size: 1.2rem; color: var(--deep-purple); margin: 0;">Who is the most affectionate?</p>
+        <div id="commentary"></div>
+        <div class="race-track">
+            <div id="fox-b" class="racer" style="top: 10px;">🦊</div>
+            <div id="pen-b" class="racer" style="top: 85px;">🐧</div>
         </div>
-
-        <div class="panel">
-            <div class="panel-icon">✈️</div>
-            <h2 id="h4">04. Spontaneous Quests</h2>
-            <p id="p4">I’ll fly out every month or two for our dates like our <span class="highlight">Renfaire trip</span> and General Conference. ✈️</p>
+        <div style="display:flex; gap:10px;">
+            <button class="btn" id="r-btn" onclick="r()">TAP!</button>
+            <button class="btn" id="boost-btn" onclick="boost()" style="background:#FF4500; color:white;">🚀 BOOST</button>
         </div>
-
-        <div class="panel">
-            <div class="panel-icon">🍅</div>
-            <h2 id="h5">05. Tomato Foodies</h2>
-            <p id="p5">We’re going to be foodies. I buy the tomatoes, you eat all the tomatoes you want. 🍅</p>
-        </div>
-
-        <div class="game-area">
-            <h2 id="gh">Affection Race!</h2>
-            <div id="commentary"></div>
-            <div class="race-track">
-                <div id="fox-box" class="racer-box">
-                    <span class="racer-emoji">🦊</span>
-                    <span class="racer-label">Paige</span>
-                </div>
-                <div id="pen-box" class="racer-box">
-                    <span class="racer-emoji">🐧</span>
-                    <span class="racer-label">Mark</span>
-                </div>
-            </div>
-            
-            <button class="game-btn" id="race-btn" onclick="race()">TAP TO RACE!</button>
-            
-            <div id="game-msg"></div>
-            <div id="final-note" class="sub-msg"></div>
-            
-            <button class="game-btn" id="reset-btn" onclick="resetGame()" 
-                    style="display:none; background: var(--white); color: var(--black); margin-top: 25px;">
-                RESTART
-            </button>
+        <div id="g-msg" class="res-text"></div>
+        <div style="display:flex; gap:10px;">
+            <button class="btn" id="re-btn" onclick="resetR()" style="display:none;">RESTART RACE</button>
+            <button class="btn next-btn" id="n6" onclick="showPage('6')" style="display:none; margin-top:8px;">Final Reason? →</button>
         </div>
     </div>
 
+    <div id="page-6" class="page" style="background: var(--lavender); color: var(--deep-purple);">
+        <h2 id="h6" style="padding: 20px;">Because we’re like, kinda cute yk & can flex on your friends, but mainly cuz we have a fat crush on each other so…cough. Anyways im kinda shy. BYE!!!</h2>
+        <button class="btn" onclick="location.reload()" id="restart-final">Back to Start</button>
+    </div>
+
     <script>
-        let currentLang = 'en';
-        const content = {
+        let cur = 'land';
+        let prev = [];
+        let lang = 'en';
+        let lClicks = 0;
+        let cItems = 0;
+
+        const t = {
             en: {
-                title: "why you should<br>date me", btn: "find out why",
-                h1: "01. Gifts & Maximalism", p1: "Since my love language is gift giving and you’re a maximalist, it's perfect synergy. 🦊",
-                h2: "02. Absolute Loyalty", p2: "I won't cheat on you. You get 100% of my focus and devotion. 🐧",
-                h3: "03. Nerd Life", p3: "Binging Manhwa and dressing up for Renfaires. We'll be the best nerds. ✨",
-                h4: "04. Spontaneous Quests", p4: "I’ll fly out every month or two for our dates like our Renfaire trip and General Conference. ✈️",
-                h5: "05. Tomato Foodies", p5: "We’re going to be foodies. I buy the tomatoes, you eat all the tomatoes you want. 🍅",
-                gh: "Affection Race!", gbtn: "TAP TO RACE!", toggle: "Switch to Spanish 🇲🇽",
-                win1: "You win! Guess I’m getting the most kisses ;)",
-                win2: "Mark wins! Guess you’re gonna be squished in marks arms after a dumpling date sometime in the future",
-                draw: "Draw! Idk, can’t think of anything creative so whatevs lol",
-                end: "The end. Btw, I’ll try to make fun stuff for u hehe",
-                restart: "RESTART",
-                loseComm: "Quickly! Marks winning!!", winComm: "Heyyyyy, let mark win, cmonnnn", tieComm: "Run forrest, RUN!"
+                title: "why you should date me", find: "find out why",
+                h1: "Chapter 1: Gifts & Maximalism", p1: "Since my love language is gift giving, what are we doing today?",
+                o1: "Food", o2: "Explore a WHOLE NEW WORLD~", o3: "Hot Topic & P&P Chill", o4: "Surprise Me",
+                r1_f: "Yum! Dumpling date? 🥟", r1_e: "To the moon and back! 🌙", r1_h: "Anyone says Pride & Prejudice, Broadway plays, & more?", r1_s: "Future Mark will plan smth spontaneous on the spot lol so idk",
+                n1: "Chapter 2: Loyalty →",
+                h2: "Chapter 2: Absolute Loyalty", p2: "Tap the lock to secure Mark's heart forever!", lbtn: "🔒 Lock Heart",
+                r2_1: "Heart Secured! It was way too easy huh? 🐧❤️",
+                r2_2: "hey, you already secured my heart, u selfish jelly person, chill!",
+                r2_3: "😭 relájate, my soft heart cant take anymore of your cuteness & I gotta leave room for God ;-;",
+                r2_roast: "Checking the locks again? You must be really obsessed with me... 😉",
+                n2: "Chapter 3: Nerd Life →",
+                h3: "Chapter 3: Nerd Life", p3: "Ready for the Renfaire and Manhwa binge?", nbtn: "Go to Renfaire!",
+                r3: "Huzzah!! Now time to go to our places & binge read 20 chapters of our webtoons",
+                n3: "Chapter 4: Side Quests →",
+                h4: "Chapter 4: Spontaneous Side Quests", p4: "Where should we go this month?", 
+                o_state: "Trip Out of State", o_gc: "Gen Conf",
+                r4_gc: "P. Oaks gonna be so proud of us, & so will your parents hehe", r4_st: "Packing for our out-of-state adventure! ✈️",
+                n4: "Chapter 5: Tomatoes →",
+                h5: "Chapter 5: Tomato Foodies", p5: "I buy the tomatoes, you eat all you want!",
+                f1: "Tomatoes", f2: "Zebra Cakes", f3: "Sparkle Cake", f4: "Salt",
+                cart_m1: "uh…you sure you need that much?", cart_m2: "oh well…guess imma go broke buying all this for you… 😅",
+                cart_stop: "Stopppp! Pleaseee! I gotta save up for a ring! Peter James, Philip Michael, Amelia Grace, Lilian Rose, & Mickey Mikaela Mackenzie Marasigan can feed themselves! XD",
+                n5: "THE RACE! →",
+                gh: "Affection Race", gs: "Who is the most affectionate?", gbtn: "TAP!", back: "← Back", toggle: "Switch to Spanish 🇲🇽",
+                win1: "You win! Guess I’m getting the most kisses ;)", win2: "Mark wins! Guess you’re gonna be squished in marks arms after a dumpling date!",
+                draw: "Draw! Idk, whatevs lol", rebtn: "RESTART RACE", n6: "Final Reason? →",
+                lC: "Quickly! Marks winning!!", wC: "Heyyyyy, let mark win, cmonnnn", tC: "Run forrest, RUN!",
+                h6: "Because we’re like, kinda cute yk & can flex on your friends, but mainly cuz we have a fat crush on each other so…cough. Anyways im kinda shy. BYE!!!",
+                restart: "Back to Start"
             },
             es: {
-                title: "por qué deberías<br>salir conmigo", btn: "descubre por qué",
-                h1: "01. Regalos y Maximalismo", p1: "Como mi lenguaje del amor es dar regalos y tú eres maximalista, es la sinergia perfecta. 🦊",
-                h2: "02. Lealtad Absoluta", p2: "No te engañaré. Tienes el 100% de mi enfoque y devoción. 🐧",
-                h3: "03. Vida de Nerds", p3: "Leyendo Manhwa y disfrazándonos para las ferias renacentistas. Seremos los mejores nerds. ✨",
-                h4: "04. Misiones Espontáneas", p4: "Volaré cada mes o dos para nuestras citas como nuestro viaje a la feria renacentista y la Conferencia General. ✈️",
-                h5: "05. Foodies de Tomates", p5: "Vamos a ser foodies. Yo compro los tomates, tú te comes todos los que quieras. 🍅",
-                gh: "¡Carrera de Afecto!", gbtn: "¡DALE YA!", toggle: "Cambiar a Inglés 🇺🇸",
-                win1: "¡Tú ganas! Supongo que me tocarán más besos ;)",
-                win2: "¡Mark gana! Prepárate para un abrazo gigante después de nuestra cita de dumplings en el futuro",
-                draw: "¡Empate! No sé, no se me ocurre nada creativo ahora lol",
-                end: "Fin. Por cierto, trataré de hacer cosas divertidas para ti hehe",
-                restart: "REINICIAR",
-                loseComm: "¡Rápido! ¡Mark va ganando!", winComm: "Oye... deja que gane Mark, por fiii", tieComm: "¡Corre, Forrest, CORRE!"
+                title: "por qué deberías salir conmigo", find: "descubre por qué",
+                h1: "Capítulo 1: Regalos y Maximalismo", p1: "Como mi lenguaje del amor es dar regalos, ¿qué haremos hoy?",
+                o1: "Comida", o2: "Explorar un MUNDO IDEAL~", o3: "Hot Topic y P&P Chill", o4: "Sorpréndeme",
+                r1_f: "¡Rico! ¿Cita de dumplings? 🥟", r1_e: "¡Hasta la luna y más allá! 🌙", r1_h: "¿Alguien dijo Orgullo y Prejuicio, obras de Broadway y más?", r1_s: "Mark del futuro planeará algo espontáneo en el momento lol",
+                n1: "Capítulo 2: Lealtad →",
+                h2: "Capítulo 2: Lealtad Absoluta", p2: "¡Toca el candado para asegurar el corazón de Mark!", lbtn: "🔒 Asegurar Corazón",
+                r2_1: "¡Corazón Asegurado! Fue demasiado fácil, ¿verdad? 🐧❤️",
+                r2_2: "¡Oye, ya tienes mi corazón, personita envidiosa, relájate!",
+                r2_3: "😭 relájate, mi corazoncito no puede más con tu ternura y tengo que dejar espacio para Dios ;-;",
+                r2_roast: "¿Revisando los candados otra vez? Debes estar obsesionada conmigo... 😉",
+                n2: "Capítulo 3: Vida Nerd →",
+                h3: "Capítulo 3: Vida Nerd", p3: "¿Lista para la feria renacentista y binging de Manhwa?", nbtn: "¡Ir a la Feria!",
+                r3: "¡Huzzah!! Hora de ir a nuestros lugares y leer 20 capítulos de nuestros webtoons",
+                n3: "Capítulo 4: Misiones →",
+                h4: "Capítulo 4: Misiones Espontáneas", p4: "¿A dónde vamos este mes?", 
+                o_state: "Viaje Fuera del Estado", o_gc: "Conf. General",
+                r4_gc: "El Élder Oaks estará orgulloso de nosotros, y tus padres también hehe", r4_st: "¡Preparando el viaje fuera del estado! ✈️",
+                n4: "Capítulo 5: Tomates →",
+                h5: "Capítulo 5: Foodies de Tomates", p5: "¡Yo compro los tomates, tú comes todos los que quieras!",
+                f1: "Tomates", f2: "Zebra Cakes", f3: "Pastel Unicornio", f4: "Sal",
+                cart_m1: "¿Estás segura de que necesitas tanto?", cart_m2: "En fin... supongo que me quedaré en la quiebra comprando todo esto para ti... 😅",
+                cart_stop: "¡Paraaaa! ¡Por favooor! ¡Tengo que ahorrar para el anillo! ¡Peter James, Philip Michael y los demás Marasigan pueden alimentarse solos! XD",
+                n5: "¡LA CARRERA! →",
+                gh: "¡Carrera de Afecto!", gs: "¿Quién es más cariñoso?", gbtn: "¡DALE YA!", back: "← Atrás", toggle: "Cambiar a Inglés 🇺🇸",
+                win1: "¡Tú ganas! Supongo que me tocarán más besos ;)", win2: "¡Mark gana! Prepárate para un abrazo gigante después de nuestra cita!",
+                draw: "¡Empate! No sé, lo que sea lol", rebtn: "REINICIAR CARRERA", n6: "¿Razón Final? →",
+                lC: "¡Rápido! ¡Mark va ganando!", wC: "Oye... deja que gane Mark, por fiii", tC: "¡Corre, Forrest, CORRE!",
+                h6: "Porque somos, como que lindos y podemos presumir con tus amigos, pero principalmente porque nos gustamos demasiado... cough. En fin, soy un poco tímido. ¡ADIÓS!",
+                restart: "Reiniciar"
             }
         };
 
+        function showPage(id) {
+            prev.push(cur);
+            document.getElementById('page-'+cur).classList.remove('active');
+            document.getElementById('page-'+id).classList.add('active');
+            cur = id;
+            document.getElementById('back-nav').style.display = (id === 'land') ? 'none' : 'block';
+        }
+
+        function goBack() {
+            if(prev.length > 0) {
+                let p = prev.pop();
+                document.getElementById('page-'+cur).classList.remove('active');
+                document.getElementById('page-'+p).classList.add('active');
+                cur = p;
+                document.getElementById('back-nav').style.display = (cur === 'land') ? 'none' : 'block';
+            }
+        }
+
         function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'es' : 'en';
-            const c = content[currentLang];
-            document.getElementById('main-title').innerHTML = c.title;
-            document.getElementById('main-btn').innerText = c.btn;
+            lang = lang === 'en' ? 'es' : 'en';
+            const c = t[lang];
+            document.getElementById('lang-btn').innerText = c.toggle;
+            document.getElementById('back-nav').innerText = c.back;
+            document.getElementById('title').innerText = c.title;
+            document.getElementById('find-out').innerText = c.find;
             document.getElementById('h1').innerText = c.h1; document.getElementById('p1').innerText = c.p1;
             document.getElementById('h2').innerText = c.h2; document.getElementById('p2').innerText = c.p2;
             document.getElementById('h3').innerText = c.h3; document.getElementById('p3').innerText = c.p3;
             document.getElementById('h4').innerText = c.h4; document.getElementById('p4').innerText = c.p4;
             document.getElementById('h5').innerText = c.h5; document.getElementById('p5').innerText = c.p5;
-            document.getElementById('gh').innerText = c.gh;
-            document.getElementById('race-btn').innerText = c.gbtn;
-            document.getElementById('reset-btn').innerText = c.restart;
-            document.querySelector('.lang-toggle').innerText = c.toggle;
+            document.getElementById('gh').innerText = c.gh; document.getElementById('gs').innerText = c.gs;
+            document.getElementById('opt1').innerText = c.o1; document.getElementById('opt2').innerText = c.o2;
+            document.getElementById('opt3').innerText = c.o3; document.getElementById('opt4').innerText = c.o4;
+            document.getElementById('opt-state').innerText = c.o_state; document.getElementById('opt-gc').innerText = c.o_gc;
+            document.getElementById('r-btn').innerText = c.gbtn;
+            document.getElementById('h6').innerText = c.h6;
+            document.getElementById('restart-final').innerText = c.restart;
+            document.getElementById('l-btn').innerText = c.lbtn;
+            document.getElementById('n-btn').innerText = c.nbtn;
+            document.getElementById('n1').innerText = c.n1;
+            document.getElementById('n2').innerText = c.n2;
+            document.getElementById('n3').innerText = c.n3;
+            document.getElementById('n4').innerText = c.n4;
+            document.getElementById('n5').innerText = c.n5;
+            document.getElementById('n6').innerText = c.n6;
+            document.getElementById('re-btn').innerText = c.rebtn;
+            document.getElementById('food-btn-1').innerText = c.f1;
+            document.getElementById('food-btn-2').innerText = c.f2;
+            document.getElementById('food-btn-3').innerText = c.f3;
+            document.getElementById('food-btn-4').innerText = c.f4;
         }
 
-        let foxPos = 0, penPos = 0, gameActive = true;
-        function race() {
-            if (!gameActive) return;
-            foxPos += Math.random() * 20; penPos += Math.random() * 20;
-            document.getElementById('fox-box').style.left = foxPos + 'px';
-            document.getElementById('pen-box').style.left = penPos + 'px';
-            
-            const comm = document.getElementById('commentary');
-            const c = content[currentLang];
-            if (foxPos < penPos - 15) comm.innerText = c.loseComm;
-            else if (foxPos > penPos + 15) comm.innerText = c.winComm;
-            else comm.innerText = c.tieComm;
+        function ch1(choice) {
+            const res = document.getElementById('ch1-res');
+            const c = t[lang];
+            if(choice === 'food') res.innerText = c.r1_f;
+            else if(choice === 'explore') res.innerText = c.r1_e;
+            else if(choice === 'hot-topic') res.innerText = c.r1_h;
+            else res.innerText = c.r1_s;
+            document.getElementById('n1').style.display = 'block';
+        }
 
-            const limit = document.querySelector('.race-track').offsetWidth - 90;
-            if (foxPos >= limit || penPos >= limit) {
-                gameActive = false;
-                document.getElementById('race-btn').style.display = 'none';
-                
-                const msg = document.getElementById('game-msg');
-                const note = document.getElementById('final-note');
-                
-                if (Math.abs(foxPos - penPos) < 10) msg.innerHTML = c.draw;
-                else if (foxPos > penPos) msg.innerHTML = c.win1;
-                else msg.innerHTML = c.win2;
-                
-                note.innerHTML = c.end;
-                comm.innerText = "";
-
-                // 2-second delay before showing Restart button
-                setTimeout(() => {
-                    document.getElementById('reset-btn').style.display = 'inline-block';
-                }, 2000);
+        function lockH() {
+            lClicks++;
+            const res = document.getElementById('ch2-res');
+            const c = t[lang];
+            if(lClicks === 1) {
+                document.getElementById('l-stage').innerText = '🔒 🐧 ❤️ 🦊';
+                res.innerText = c.r2_1;
+                document.getElementById('n2').style.display = 'block';
+            } else if (lClicks < 5) {
+                res.innerText = c.r2_2;
+            } else if (lClicks === 5) {
+                res.innerText = c.r2_3;
+            } else {
+                res.innerText = c.r2_roast;
             }
         }
 
-        function resetGame() {
-            foxPos = 0; penPos = 0; gameActive = true;
-            document.getElementById('fox-box').style.left = '0px';
-            document.getElementById('pen-box').style.left = '0px';
-            document.getElementById('race-btn').style.display = 'inline-block';
-            document.getElementById('reset-btn').style.display = 'none';
-            document.getElementById('game-msg').innerHTML = "";
-            document.getElementById('final-note').innerHTML = "";
+        function goN() {
+            document.getElementById('ch3-res').innerText = t[lang].r3;
+            document.getElementById('n3').style.display = 'block';
+        }
+
+        function q(p) {
+            const res = document.getElementById('ch4-res');
+            const c = t[lang];
+            if(p === 'state') res.innerText = c.r4_st;
+            else res.innerText = c.r4_gc;
+            document.getElementById('n4').style.display = 'block';
+        }
+
+        function add(item) {
+            cItems++;
+            const cart = document.getElementById('cart');
+            const msg = document.getElementById('cart-msg');
+            const c = t[lang];
+            if(cart.innerText.length > 50) cart.style.overflow = "visible";
+            cart.innerText += item;
+            
+            if(cItems >= 20) msg.innerText = c.cart_stop;
+            else if(cItems >= 10) msg.innerText = c.cart_m2;
+            else if(cItems >= 5) msg.innerText = c.cart_m1;
+        }
+
+        let fP = 0, pP = 0, active = true;
+        function r() {
+            if(!active) return;
+            let stepF = window.innerWidth > 800 ? 25 : 15; 
+            let stepP = window.innerWidth > 800 ? 30 : 18; 
+            fP += Math.random() * stepF; pP += Math.random() * stepP;
+            updateTrack();
+        }
+
+        function boost() {
+            if(!active) return;
+            fP += 80; 
+            updateTrack();
+        }
+
+        function updateTrack() {
+            document.getElementById('fox-b').style.left = fP + 'px';
+            document.getElementById('pen-b').style.left = pP + 'px';
+            
+            const comm = document.getElementById('commentary');
+            const c = t[lang];
+
+            if(fP < pP - 20) comm.innerText = c.lC;
+            else if(fP > pP + 20) comm.innerText = c.wC;
+            else comm.innerText = c.tC;
+
+            const limit = document.querySelector('.race-track').offsetWidth - 80;
+            if(fP >= limit || pP >= limit) {
+                active = false;
+                document.getElementById('r-btn').style.display = 'none';
+                document.getElementById('boost-btn').style.display = 'none';
+                const msg = document.getElementById('g-msg');
+                const cL = t[lang];
+                if(Math.abs(fP - pP) < 15) msg.innerHTML = cL.draw;
+                else if(fP > pP) msg.innerHTML = cL.win1;
+                else msg.innerHTML = cL.win2;
+                document.getElementById('re-btn').style.display = 'block';
+                setTimeout(() => { document.getElementById('n6').style.display = 'block'; }, 1000);
+            }
+        }
+
+        function resetR() {
+            fP = 0; pP = 0; active = true;
+            document.getElementById('fox-b').style.left = '0';
+            document.getElementById('pen-b').style.left = '0';
+            document.getElementById('r-btn').style.display = 'block';
+            document.getElementById('boost-btn').style.display = 'block';
+            document.getElementById('re-btn').style.display = 'none';
+            document.getElementById('n6').style.display = 'none';
+            document.getElementById('g-msg').innerHTML = "";
             document.getElementById('commentary').innerText = "";
         }
     </script>
