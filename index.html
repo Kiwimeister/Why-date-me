@@ -15,20 +15,44 @@
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-        body, html { margin: 0; padding: 0; font-family: "Fredoka", sans-serif; background-color: var(--white); overflow: hidden; height: 100%; }
+        
+        /* Fixed body to prevent "bounce" but allowed scrolling on the pages */
+        body, html { 
+            margin: 0; padding: 0; 
+            font-family: "Fredoka", sans-serif; 
+            background-color: var(--white); 
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* This keeps the background steady */
+        }
         
         button { cursor: pointer; font-family: inherit; transition: 0.1s; }
 
         .page {
-            display: none; height: 100vh; width: 100vw;
-            flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 20px; position: absolute; top: 0; left: 0;
+            display: none; 
+            height: 100vh; 
+            width: 100vw;
+            flex-direction: column; 
+            justify-content: flex-start; /* Align to top so scrolling starts at the beginning */
+            align-items: center;
+            text-align: center; 
+            padding: 100px 20px 60px 20px; /* Generous padding for header/footer */
+            position: absolute; top: 0; left: 0;
+            overflow-y: auto; /* ALLOWS SCROLLING ON MOBILE */
+            -webkit-overflow-scrolling: touch;
         }
+        
         .active { display: flex; }
 
         .nav-header {
-            position: fixed; top: 15px; width: 100%; display: flex; justify-content: space-between; padding: 0 15px; z-index: 100;
+            position: fixed; top: 0; left: 0; width: 100%; 
+            display: flex; justify-content: space-between; 
+            padding: 15px; z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
+
         .btn-small { background: var(--white); border: 2px solid var(--black); padding: 8px 15px; border-radius: 50px; font-weight: bold; font-size: 0.9rem; box-shadow: 3px 3px 0px var(--black); }
 
         h1 { font-size: 12vw; color: var(--deep-purple); margin-bottom: 10px; text-transform: lowercase; }
@@ -39,20 +63,21 @@
             background: var(--white); border: 3px solid var(--black);
             padding: 15px 30px; border-radius: 50px; font-size: 1.2rem;
             margin: 8px; box-shadow: 5px 5px 0px var(--black);
+            flex-shrink: 0; /* Prevents buttons from squishing */
         }
         .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--black); }
         
         .next-btn { background: var(--lavender); margin-top: 30px; font-weight: bold; font-size: 1.4rem; }
 
-        .stage { font-size: 5rem; margin-bottom: 20px; }
+        .stage { font-size: 5rem; margin-bottom: 20px; flex-shrink: 0; }
         .res-text { font-size: 2.2rem; font-weight: bold; margin-top: 20px; color: var(--deep-purple); min-height: 2.5rem; line-height: 1.2; }
-        .cart-zone { font-size: 3rem; min-height: 100px; max-width: 300px; overflow: hidden; display: flex; flex-wrap: wrap; justify-content: center; }
+        .cart-zone { font-size: 3rem; min-height: 100px; max-width: 300px; display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
 
-        .race-track { width: 90%; height: 180px; background: #eee; border: 3px solid var(--black); border-radius: 20px; position: relative; margin: 20px 0; }
+        .race-track { width: 95%; max-width: 600px; height: 180px; background: #eee; border: 3px solid var(--black); border-radius: 20px; position: relative; margin: 20px 0; flex-shrink: 0; }
         .racer { position: absolute; left: 0; transition: left 0.1s linear; font-size: 4rem; }
-        #commentary { position: absolute; width: 100%; font-weight: bold; pointer-events: none; z-index: 5; }
+        #commentary { font-weight: bold; pointer-events: none; height: 1.5rem; margin-bottom: 10px; }
 
-        @media (min-width: 800px) { h1 { font-size: 80px; } .race-track { width: 600px; } }
+        @media (min-width: 800px) { h1 { font-size: 80px; } }
     </style>
 </head>
 <body>
@@ -62,7 +87,7 @@
         <button class="btn-small" onclick="toggleLanguage()" id="lang-btn">Switch to Spanish 🇲🇽</button>
     </div>
 
-    <div id="page-land" class="page active" style="background: var(--lavender);">
+    <div id="page-land" class="page active" style="background: var(--lavender); justify-content: center; padding-top: 20px;">
         <div class="stage">🦊 🐧</div>
         <h1 id="title">why you should date me</h1>
         <button class="btn" onclick="showPage('0')" id="find-out">find out why</button>
@@ -72,12 +97,10 @@
         <div class="stage">🦊 💝 🐧</div>
         <h2 id="h1">Chapter 1: Gifts & Maximalism</h2>
         <p id="p1">Since my love language is gift giving, what are we doing today?</p>
-        <div id="ch1-btns">
-            <button class="btn" onclick="ch1('food')" id="opt1">Food</button>
-            <button class="btn" onclick="ch1('explore')" id="opt2">Explore a WHOLE NEW WORLD~</button>
-            <button class="btn" onclick="ch1('hot-topic')" id="opt3">Hot Topic & P&P Chill</button>
-            <button class="btn" onclick="ch1('surprise')" id="opt4">Surprise Me</button>
-        </div>
+        <button class="btn" onclick="ch1('food')" id="opt1">Food</button>
+        <button class="btn" onclick="ch1('explore')" id="opt2">Explore a WHOLE NEW WORLD~</button>
+        <button class="btn" onclick="ch1('hot-topic')" id="opt3">Hot Topic & P&P Chill</button>
+        <button class="btn" onclick="ch1('surprise')" id="opt4">Surprise Me</button>
         <div id="ch1-res" class="res-text"></div>
         <button class="btn next-btn" onclick="showPage('1')" id="n1" style="display:none;">Chapter 2: Loyalty →</button>
     </div>
@@ -116,9 +139,9 @@
         <p id="p5">I buy the tomatoes, you eat all you want!</p>
         <div>
             <button class="btn-small" onclick="add('🍅')" id="food-btn-1">Tomatoes</button>
-            <button class="btn-small" onclick="add('🦓')" id="food-btn-2">Zebra Cakes</button>
-            <button class="btn-small" onclick="add('🦄')" id="food-btn-3">Sparkle Cake</button>
-            <button class="btn-small" onclick="add('🧂')" id="food-btn-4">Salt</button>
+            <button class="btn-small" onclick="add('🦓')">Zebra Cakes</button>
+            <button class="btn-small" onclick="add('🦄')">Sparkle Cake</button>
+            <button class="btn-small" onclick="add('🧂')">Salt</button>
         </div>
         <div id="cart-msg" style="font-weight:bold; margin-top:10px; color:red; font-size: 1.1rem; padding: 0 10px;"></div>
         <button class="btn next-btn" onclick="showPage('5')" id="n5">THE RACE! →</button>
@@ -143,8 +166,8 @@
         </div>
     </div>
 
-    <div id="page-6" class="page" style="background: var(--lavender); color: var(--deep-purple);">
-        <h2 id="h6" style="padding: 20px;">Because we’re like, kinda cute yk & can flex on your friends, but mainly cuz we have a fat crush on each other so…cough. If I’m ever a jerk to you, just lmk & I’ll apologise & not do it again. Ur pretty good at communicating so I appreciate that about you alot :) Anyways im kinda shy. BYE!!!</h2>
+    <div id="page-6" class="page" style="background: var(--lavender); color: var(--deep-purple); justify-content: center; padding-top: 20px;">
+        <h2 id="h6" style="padding: 20px; font-size: 1.4rem; line-height: 1.5;">Because we’re like, kinda cute yk & can flex on your friends, but mainly cuz we have a fat crush on each other so…cough. If I’m ever a jerk to you, just lmk & I’ll apologise & not do it again. Ur pretty good at communicating so I appreciate that about you alot :) Anyways im kinda shy. BYE!!!</h2>
         <button class="btn" onclick="location.reload()" id="restart-final">Back to Start</button>
     </div>
 
@@ -170,7 +193,6 @@
                 n3: "Chapter 4: Side Quests →", h4: "Chapter 4: Spontaneous Side Quests", p4: "Where should we go this month?", 
                 o_state: "Trip Out of State", o_gc: "Gen Conf", r4_gc: "P. Oaks gonna be so proud of us, & so will your parents hehe", r4_st: "Packing for our out-of-state adventure! ✈️",
                 n4: "Chapter 5: Tomatoes →", h5: "Chapter 5: Tomato Foodies", p5: "I buy the tomatoes, you eat all you want!",
-                f1: "Tomatoes", f2: "Zebra Cakes", f3: "Sparkle Cake", f4: "Salt",
                 cart_m1: "uh…you sure you need that much?", cart_m2: "oh well…guess imma go broke buying all this for you… 😅",
                 cart_stop: "Stopppp! Pleaseee! I gotta save up for a ring! Peter James, Philip Michael, Amelia Grace, Lilian Rose, & Mickey Mikaela Mackenzie Marasigan can feed themselves! XD",
                 n5: "THE RACE! →", gh: "Affection Race", gs: "Who is the most affectionate?", gbtn: "TAP!", back: "← Back", toggle: "Switch to Spanish 🇲🇽",
@@ -194,7 +216,6 @@
                 n3: "Capítulo 4: Misiones →", h4: "Capítulo 4: Misiones Espontáneas", p4: "¿A dónde vamos este mes?", 
                 o_state: "Viaje Fuera del Estado", o_gc: "Conf. General", r4_gc: "El Élder Oaks estará orgulloso de nosotros, y tus padres también hehe", r4_st: "¡Preparando el viaje fuera del estado! ✈️",
                 n4: "Capítulo 5: Tomates →", h5: "Capítulo 5: Foodies de Tomates", p5: "¡Yo compro los tomates, tú comes todos los que quieras!",
-                f1: "Tomates", f2: "Zebra Cakes", f3: "Pastel Unicornio", f4: "Sal",
                 cart_m1: "¿Estás segura de que necesitas tanto?", cart_m2: "En fin... supongo que me quedaré en la quiebra comprando todo esto para ti... 😅",
                 cart_stop: "¡Paraaaa! ¡Por favooor! ¡Tengo que ahorrar para el anillo! ¡Peter James, Philip Michael, Amelia Grace, Lilian Rose y Mickey Mikaela Mackenzie Marasigan pueden alimentarse solos! XD",
                 n5: "¡LA CARRERA! →", gh: "¡Carrera de Afecto!", gs: "¿Quién es más cariñoso?", gbtn: "¡DALE YA!", back: "← Atrás", toggle: "Cambiar a Inglés 🇺🇸",
@@ -210,6 +231,7 @@
             prev.push(cur);
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-'+id).classList.add('active');
+            document.getElementById('page-'+id).scrollTop = 0; // Scroll back to top when entering
             cur = id;
             document.getElementById('back-nav').style.visibility = (id === 'land') ? 'hidden' : 'visible';
         }
@@ -246,8 +268,6 @@
             document.getElementById('n1').innerText = c.n1; document.getElementById('n2').innerText = c.n2;
             document.getElementById('n3').innerText = c.n3; document.getElementById('n4').innerText = c.n4;
             document.getElementById('n5').innerText = c.n5; document.getElementById('n6').innerText = c.n6;
-            document.getElementById('food-btn-1').innerText = c.f1; document.getElementById('food-btn-2').innerText = c.f2;
-            document.getElementById('food-btn-3').innerText = c.f3; document.getElementById('food-btn-4').innerText = c.f4;
         }
 
         function ch1(choice) {
@@ -300,8 +320,7 @@
         let fP = 0, pP = 0, active = true;
         function r() {
             if(!active) return;
-            let stepF = 18; let stepP = 20; 
-            fP += Math.random() * stepF; pP += Math.random() * stepP;
+            fP += Math.random() * 18; pP += Math.random() * 20;
             updateTrack();
         }
 
