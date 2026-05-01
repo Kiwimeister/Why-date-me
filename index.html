@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Paige</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lavender: #E6E6FA;
+            --deep-purple: #6A5ACD;
+            --mint: #F2FFF9;
+            --black: #000000;
+            --white: #FFFFFF;
+        }
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "Childos Arabic", "Fredoka", sans-serif;
+            background-color: var(--mint);
+            overflow-x: hidden;
+        }
+
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--white);
+            border: 3px solid var(--black);
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 6px 6px 0px var(--lavender);
+        }
+
+        .decoration { position: absolute; font-size: 8rem; pointer-events: none; z-index: 1; user-select: none; }
+        .floating { animation: float 5s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-40px) rotate(15deg); }
+        }
+
+        .landing-page {
+            height: 100vh;
+            background-color: var(--lavender);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-text { font-size: 180px; font-weight: bold; color: var(--deep-purple); margin: 0; line-height: 0.85; text-transform: lowercase; z-index: 2; }
+        
+        .start-btn {
+            margin-top: 100px;
+            font-family: inherit; font-size: 70px;
+            color: var(--black); background-color: var(--white);
+            border: 5px solid var(--black); padding: 25px 80px;
+            border-radius: 150px; cursor: pointer; z-index: 5;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .start-btn:hover { transform: scale(1.1); box-shadow: 15px 15px 0px var(--deep-purple); }
+
+        .content-section {
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .benefit-card {
+            background-color: var(--white);
+            width: 100%; max-width: 850px;
+            padding: 50px; margin-bottom: 80px;
+            border: 4px solid var(--black); border-radius: 40px;
+            box-shadow: 20px 20px 0px var(--lavender);
+        }
+
+        .card-icon { font-size: 6rem; margin-bottom: 20px; display: block; }
+        h2 { font-size: 2.8rem; margin: 0; }
+        p { font-size: 1.5rem; line-height: 1.6; }
+        .highlight { border-bottom: 6px solid var(--lavender); }
+
+        .game-container {
+            background-color: var(--white);
+            width: 100%; max-width: 850px;
+            padding: 40px; border: 4px solid var(--black);
+            border-radius: 40px; text-align: center;
+            box-shadow: 20px 20px 0px #98FF98;
+            margin-bottom: 150px;
+        }
+
+        .race-track {
+            height: 250px;
+            background: #f9f9f9;
+            border-radius: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--black);
+        }
+
+        .racer-container {
+            position: absolute;
+            left: 0;
+            transition: left 0.1s linear;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+
+        .racer-emoji { font-size: 4rem; }
+        .racer-label { font-size: 1rem; font-weight: bold; text-transform: uppercase; }
+
+        #fox-container { top: 20px; }
+        #pen-container { top: 130px; }
+
+        .finish-line {
+            position: absolute;
+            right: 20px;
+            top: 0; bottom: 0;
+            width: 10px;
+            border-left: 4px dashed var(--black);
+        }
+
+        .game-btn {
+            padding: 20px 50px;
+            font-size: 2rem;
+            font-family: inherit;
+            background: var(--lavender);
+            border: 4px solid var(--black);
+            border-radius: 60px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #commentary { font-size: 1.4rem; color: var(--deep-purple); height: 2rem; margin-bottom: 10px; }
+        #game-msg { font-size: 1.8rem; font-weight: bold; margin-top: 30px; line-height: 1.4; }
+        .sub-msg { font-size: 1.2rem; font-weight: normal; margin-top: 15px; color: #555; }
+
+        @media (max-width: 1100px) { .hero-text { font-size: 100px; } .start-btn { font-size: 40px; } }
+    </style>
+</head>
+<body>
+
+    <button class="lang-toggle" onclick="toggleLanguage()">Switch to Spanish 🇲🇽</button>
+
+    <section class="landing-page">
+        <div class="decoration floating" style="top: 5%; left: 5%;">🦊</div>
+        <div class="decoration floating" style="top: 10%; right: 8%; animation-delay: 1.5s;">🐧</div>
+        <div class="decoration floating" style="bottom: 10%; left: 10%; animation-delay: 2.5s;">🐧</div>
+        <div class="decoration floating" style="bottom: 5%; right: 5%; animation-delay: 0.8s;">🦊</div>
+        
+        <h1 class="hero-text" id="main-title">why you should<br>date me</h1>
+        <button class="start-btn" id="main-btn" onclick="document.getElementById('reasons').scrollIntoView();">find out why</button>
+    </section>
+
+    <section id="reasons" class="content-section">
+        <div class="benefit-card">
+            <span class="card-icon">🎁</span>
+            <h2 id="h1">01. Gift Giving & Maximalism</h2>
+            <p id="p1">Since my love language is <span class="highlight">gift giving</span> and you’re a <span class="highlight">maximalist</span>, it's perfect synergy. 🦊</p>
+        </div>
+
+        <div class="benefit-card">
+            <span class="card-icon">🤝</span>
+            <h2 id="h2">02. Absolute Loyalty</h2>
+            <p id="p2">I won't cheat on you. You get 100% of my focus and devotion. 🐧</p>
+        </div>
+
+        <div class="benefit-card">
+            <span class="card-icon">📖</span>
+            <h2 id="h3">03. Partners in Nerdiness</h2>
+            <p id="p3">Binging <span class="highlight">Manhwa</span> and dressing up for <span class="highlight">Renfaires</span>. We'll be the best nerds. ✨</p>
+        </div>
+
+        <div class="benefit-card">
+            <span class="card-icon">✈️</span>
+            <h2 id="h4">04. Spontaneous Quests</h2>
+            <p id="p4">I’ll fly out every month or two for our dates like our <span class="highlight">Renfaire trip</span> and General Conference. ✈️</p>
+        </div>
+
+        <div class="benefit-card">
+            <span class="card-icon">🍅</span>
+            <h2 id="h5">05. Tomato Foodies</h2>
+            <p id="p5">We’re going to be foodies. I buy the tomatoes, you eat all the tomatoes you want. 🍅</p>
+        </div>
+
+        <div class="game-container">
+            <h2 id="gh">Affection Race!</h2>
+            <div id="commentary"></div>
+            <div class="race-track">
+                <div class="finish-line"></div>
+                <div id="fox-container" class="racer-container">
+                    <div class="racer-emoji">🦊</div>
+                    <div class="racer-label">Paige</div>
+                </div>
+                <div id="pen-container" class="racer-container">
+                    <div class="racer-emoji">🐧</div>
+                    <div class="racer-label">Mark</div>
+                </div>
+            </div>
+            <button class="game-btn" id="race-btn" onclick="race()">TAP TO RACE!</button>
+            <button class="game-btn" id="reset-btn" onclick="resetGame()" style="display:none; background: var(--mint);">RESTART</button>
+            <div id="game-msg"></div>
+            <div id="final-note" class="sub-msg"></div>
+        </div>
+    </section>
+
+    <script>
+        let currentLang = 'en';
+        const content = {
+            en: {
+                title: "why you should<br>date me", btn: "find out why",
+                h1: "01. Gift Giving & Maximalism", p1: "Since my love language is gift giving and you’re a maximalist, it's perfect synergy. 🦊",
+                h2: "02. Absolute Loyalty", p2: "I won't cheat on you. You get 100% of my focus and devotion. 🐧",
+                h3: "03. Partners in Nerdiness", p3: "Binging Manhwa and dressing up for Renfaires. We'll be the best nerds. ✨",
+                h4: "04. Spontaneous Quests", p4: "I’ll fly out every month or two for our dates like our Renfaire trip and General Conference. ✈️",
+                h5: "05. Tomato Foodies", p5: "We’re going to be foodies. I buy the tomatoes, you eat all the tomatoes you want. 🍅",
+                gh: "Affection Race!", gbtn: "TAP TO RACE!", toggle: "Switch to Spanish 🇲🇽",
+                win1: "You win! Guess I’m getting the most kisses ;)",
+                win2: "Mark wins! Guess you’re gonna be squished in marks arms after a dumpling date sometime in the future",
+                draw: "Draw! Idk, can’t think of anything creative so whatevs lol",
+                end: "The end. Btw, I’ll try to make fun stuff for u hehe",
+                restart: "RESTART",
+                loseComm: "Quickly! Marks winning!!", winComm: "Heyyyyy, let mark win, cmonnnn", tieComm: "Is that all you got? Run forrest, RUN!"
+            },
+            es: {
+                title: "por qué deberías<br>salir conmigo", btn: "descubre por qué",
+                h1: "01. Regalos y Maximalismo", p1: "Como mi lenguaje del amor es dar regalos y tú eres maximalista, es la sinergia perfecta. 🦊",
+                h2: "02. Lealtad Absoluta", p2: "No te engañaré. Tienes el 100% de mi enfoque y devoción. 🐧",
+                h3: "03. Compañeros de Nerdismo", p3: "Leyendo Manhwa y disfrazándonos para las ferias renacentistas. Seremos los mejores nerds. ✨",
+                h4: "04. Misiones Espontáneas", p4: "Volaré cada mes o dos para nuestras citas como nuestro viaje a la feria renacentista y la Conferencia General. ✈️",
+                h5: "05. Foodies de Tomates", p5: "Vamos a ser foodies. Yo compro los tomates, tú te comes todos los que quieras. 🍅",
+                gh: "¡Carrera de Afecto!", gbtn: "¡DALE YA!", toggle: "Cambiar a Inglés 🇺🇸",
+                win1: "¡Tú ganas! Supongo que me tocarán más besos ;)",
+                win2: "¡Mark gana! Prepárate para un abrazo gigante después de nuestra cita de dumplings en el futuro",
+                draw: "¡Empate! No sé, no se me ocurre nada creativo ahora lol",
+                end: "Fin. Por cierto, trataré de hacer cosas divertidas para ti hehe",
+                restart: "REINICIAR",
+                loseComm: "¡Rápido! ¡Mark va ganando!", winComm: "Oye... deja que gane Mark, por fiii", tieComm: "¿Es todo lo que tienes? ¡Corre, Forrest, CORRE!"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'es' : 'en';
+            const c = content[currentLang];
+            document.getElementById('main-title').innerHTML = c.title;
+            document.getElementById('main-btn').innerText = c.btn;
+            document.getElementById('h1').innerText = c.h1; document.getElementById('p1').innerText = c.p1;
+            document.getElementById('h2').innerText = c.h2; document.getElementById('p2').innerText = c.p2;
+            document.getElementById('h3').innerText = c.h3; document.getElementById('p3').innerText = c.p3;
+            document.getElementById('h4').innerText = c.h4; document.getElementById('p4').innerText = c.p4;
+            document.getElementById('h5').innerText = c.h5; document.getElementById('p5').innerText = c.p5;
+            document.getElementById('gh').innerText = c.gh;
+            document.getElementById('race-btn').innerText = c.gbtn;
+            document.getElementById('reset-btn').innerText = c.restart;
+            document.querySelector('.lang-toggle').innerText = c.toggle;
+        }
+
+        let foxPos = 0, penPos = 0, gameActive = true;
+        function race() {
+            if (!gameActive) return;
+            foxPos += Math.random() * 25; penPos += Math.random() * 25;
+            document.getElementById('fox-container').style.left = foxPos + 'px';
+            document.getElementById('pen-container').style.left = penPos + 'px';
+            
+            const comm = document.getElementById('commentary');
+            const c = content[currentLang];
+            if (foxPos < penPos - 20) comm.innerText = c.loseComm;
+            else if (foxPos > penPos + 20) comm.innerText = c.winComm;
+            else comm.innerText = c.tieComm;
+
+            const trackWidth = document.querySelector('.race-track').offsetWidth - 120;
+            if (foxPos >= trackWidth || penPos >= trackWidth) {
+                gameActive = false;
+                document.getElementById('race-btn').style.display = 'none';
+                document.getElementById('reset-btn').style.display = 'inline-block';
+                const msg = document.getElementById('game-msg');
+                const note = document.getElementById('final-note');
+                if (Math.abs(foxPos - penPos) < 10) msg.innerHTML = c.draw;
+                else if (foxPos > penPos) msg.innerHTML = c.win1;
+                else msg.innerHTML = c.win2;
+                note.innerHTML = c.end;
+                comm.innerText = "";
+            }
+        }
+
+        function resetGame() {
+            foxPos = 0; penPos = 0; gameActive = true;
+            document.getElementById('fox-container').style.left = '0px';
+            document.getElementById('pen-container').style.left = '0px';
+            document.getElementById('race-btn').style.display = 'inline-block';
+            document.getElementById('reset-btn').style.display = 'none';
+            document.getElementById('game-msg').innerHTML = "";
+            document.getElementById('final-note').innerHTML = "";
+            document.getElementById('commentary').innerText = "";
+        }
+    </script>
+</body>
+</html>
