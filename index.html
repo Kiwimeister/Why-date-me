@@ -14,11 +14,15 @@
             --white: #FFFFFF;
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+        * { 
+            box-sizing: border-box; 
+            scroll-behavior: smooth; 
+            -webkit-tap-highlight-color: transparent; 
+        }
 
         body, html {
             margin: 0; padding: 0;
-            font-family: "Childos Arabic", "Fredoka", sans-serif;
+            font-family: "Fredoka", sans-serif;
             background-color: var(--white);
             color: var(--black);
         }
@@ -31,6 +35,7 @@
             background: var(--white); border: 2px solid var(--black);
             padding: 8px 12px; border-radius: 50px; cursor: pointer;
             font-size: 0.9rem; font-weight: bold;
+            box-shadow: 4px 4px 0px var(--lavender);
         }
 
         /* LANDING PAGE - WEBTOON STYLE */
@@ -44,13 +49,15 @@
         }
 
         .hero-text {
-            font-size: 15vw; /* Fluid size for mobile */
+            font-size: 14vw; /* Scaled for mobile */
             font-weight: bold; color: var(--deep-purple);
-            margin: 0; line-height: 1; text-transform: lowercase;
+            margin: 0; line-height: 1.1; text-transform: lowercase;
+            z-index: 2;
         }
 
         .floating-emoji {
             font-size: 4rem; position: absolute;
+            z-index: 1;
             animation: float 4s ease-in-out infinite;
         }
 
@@ -60,20 +67,22 @@
         }
 
         .start-btn {
-            margin-top: 40px; font-family: inherit; font-size: 2rem;
-            color: var(--black); background: var(--mint);
-            border: 3px solid var(--black); padding: 15px 40px;
+            margin-top: 40px; font-family: inherit; font-size: 1.8rem;
+            color: var(--black); background: var(--white);
+            border: 3px solid var(--black); padding: 12px 35px;
             border-radius: 100px; cursor: pointer;
+            box-shadow: 6px 6px 0px var(--deep-purple);
+            z-index: 3;
         }
 
         /* WEBTOON REASONS SECTION */
         .reasons-container {
-            width: 100%; max-width: 500px;
+            width: 100%; max-width: 600px;
             margin: 0 auto; display: flex; flex-direction: column;
         }
 
         .panel {
-            padding: 60px 30px;
+            padding: 80px 25px;
             border-bottom: 1px solid #eee;
             display: flex; flex-direction: column;
             align-items: center; text-align: center;
@@ -81,43 +90,45 @@
 
         .panel-icon { font-size: 5rem; margin-bottom: 15px; }
         .panel h2 { font-size: 1.8rem; margin: 10px 0; color: var(--deep-purple); }
-        .panel p { font-size: 1.2rem; line-height: 1.5; color: #333; margin: 0; }
+        .panel p { font-size: 1.25rem; line-height: 1.6; color: #333; margin: 0; }
         .highlight { background-color: var(--lavender); padding: 0 4px; }
 
-        /* GAME SECTION */
+        /* GAME AREA */
         .game-area {
-            background-color: var(--mint); padding: 50px 20px;
+            background-color: var(--mint); padding: 60px 20px;
             border-top: 3px solid var(--black);
+            text-align: center;
         }
 
         .race-track {
-            height: 180px; background: var(--white);
-            border-radius: 20px; border: 3px solid var(--black);
-            margin: 20px 0; position: relative; overflow: hidden;
+            height: 200px; background: var(--white);
+            border-radius: 25px; border: 3px solid var(--black);
+            margin: 25px 0; position: relative; overflow: hidden;
         }
 
         .racer-box {
-            position: absolute; left: 0; width: 60px;
+            position: absolute; left: 0; width: 80px;
             display: flex; flex-direction: column; align-items: center;
             transition: left 0.1s linear;
         }
 
-        #fox-box { top: 15px; }
-        #pen-box { top: 95px; }
-        .racer-emoji { font-size: 3rem; }
-        .racer-label { font-size: 0.8rem; font-weight: bold; }
+        #fox-box { top: 20px; }
+        #pen-box { top: 110px; }
+        .racer-emoji { font-size: 3.5rem; }
+        .racer-label { font-size: 0.85rem; font-weight: bold; margin-top: -5px; }
 
         .game-btn {
-            width: 100%; max-width: 300px;
-            padding: 20px; font-size: 1.5rem;
+            width: 100%; max-width: 280px;
+            padding: 18px; font-size: 1.6rem;
             background: var(--deep-purple); color: var(--white);
             border: 3px solid var(--black); border-radius: 50px;
-            cursor: pointer; margin-top: 10px;
-            font-family: inherit;
+            cursor: pointer; font-family: inherit;
+            box-shadow: 5px 5px 0px var(--black);
         }
 
-        #commentary { height: 2rem; margin: 10px 0; font-weight: bold; color: var(--deep-purple); }
-        #game-msg { font-size: 1.4rem; margin-top: 20px; font-weight: bold; }
+        #commentary { height: 2.5rem; margin-bottom: 10px; font-weight: bold; color: var(--deep-purple); font-size: 1.3rem; }
+        #game-msg { font-size: 1.5rem; margin-top: 25px; font-weight: bold; padding: 0 10px; }
+        .sub-msg { font-size: 1.1rem; color: #666; margin-top: 15px; }
 
         @media (min-width: 800px) {
             .hero-text { font-size: 100px; }
@@ -167,8 +178,8 @@
         </div>
 
         <div class="game-area">
-            <h2 id="gh" style="text-align: center;">Affection Race!</h2>
-            <div id="commentary" style="text-align: center;"></div>
+            <h2 id="gh">Affection Race!</h2>
+            <div id="commentary"></div>
             <div class="race-track">
                 <div id="fox-box" class="racer-box">
                     <span class="racer-emoji">🦊</span>
@@ -179,12 +190,16 @@
                     <span class="racer-label">Mark</span>
                 </div>
             </div>
-            <center>
-                <button class="game-btn" id="race-btn" onclick="race()">TAP TO RACE!</button>
-                <button class="game-btn" id="reset-btn" onclick="resetGame()" style="display:none;">RESTART</button>
-            </center>
-            <div id="game-msg" style="text-align: center;"></div>
-            <div id="final-note" style="text-align: center; margin-top: 10px; font-size: 1rem; color: #666;"></div>
+            
+            <button class="game-btn" id="race-btn" onclick="race()">TAP TO RACE!</button>
+            
+            <div id="game-msg"></div>
+            <div id="final-note" class="sub-msg"></div>
+            
+            <button class="game-btn" id="reset-btn" onclick="resetGame()" 
+                    style="display:none; background: var(--white); color: var(--black); margin-top: 25px;">
+                RESTART
+            </button>
         </div>
     </div>
 
@@ -203,6 +218,7 @@
                 win2: "Mark wins! Guess you’re gonna be squished in marks arms after a dumpling date sometime in the future",
                 draw: "Draw! Idk, can’t think of anything creative so whatevs lol",
                 end: "The end. Btw, I’ll try to make fun stuff for u hehe",
+                restart: "RESTART",
                 loseComm: "Quickly! Marks winning!!", winComm: "Heyyyyy, let mark win, cmonnnn", tieComm: "Run forrest, RUN!"
             },
             es: {
@@ -217,6 +233,7 @@
                 win2: "¡Mark gana! Prepárate para un abrazo gigante después de nuestra cita de dumplings en el futuro",
                 draw: "¡Empate! No sé, no se me ocurre nada creativo ahora lol",
                 end: "Fin. Por cierto, trataré de hacer cosas divertidas para ti hehe",
+                restart: "REINICIAR",
                 loseComm: "¡Rápido! ¡Mark va ganando!", winComm: "Oye... deja que gane Mark, por fiii", tieComm: "¡Corre, Forrest, CORRE!"
             }
         };
@@ -233,6 +250,7 @@
             document.getElementById('h5').innerText = c.h5; document.getElementById('p5').innerText = c.p5;
             document.getElementById('gh').innerText = c.gh;
             document.getElementById('race-btn').innerText = c.gbtn;
+            document.getElementById('reset-btn').innerText = c.restart;
             document.querySelector('.lang-toggle').innerText = c.toggle;
         }
 
@@ -249,18 +267,25 @@
             else if (foxPos > penPos + 15) comm.innerText = c.winComm;
             else comm.innerText = c.tieComm;
 
-            const limit = document.querySelector('.race-track').offsetWidth - 70;
+            const limit = document.querySelector('.race-track').offsetWidth - 90;
             if (foxPos >= limit || penPos >= limit) {
                 gameActive = false;
                 document.getElementById('race-btn').style.display = 'none';
-                document.getElementById('reset-btn').style.display = 'inline-block';
+                
                 const msg = document.getElementById('game-msg');
                 const note = document.getElementById('final-note');
+                
                 if (Math.abs(foxPos - penPos) < 10) msg.innerHTML = c.draw;
                 else if (foxPos > penPos) msg.innerHTML = c.win1;
                 else msg.innerHTML = c.win2;
+                
                 note.innerHTML = c.end;
                 comm.innerText = "";
+
+                // 2-second delay before showing Restart button
+                setTimeout(() => {
+                    document.getElementById('reset-btn').style.display = 'inline-block';
+                }, 2000);
             }
         }
 
